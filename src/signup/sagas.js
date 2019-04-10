@@ -21,11 +21,10 @@ function signupApi(email, password) {
 function* signupFlow(action) {
   try {
     const {email, password} = action;
-    console.log(email, password);
     const response = yield call(signupApi, email, password);
     yield put({type: SIGNUP_SUCCESS}, response);
-  } catch (err) {
-    yield put({type: SIGNUP_ERROR}, err);
+  } catch (error) {
+    yield put({type: SIGNUP_ERROR, error});
   }
 }
 
