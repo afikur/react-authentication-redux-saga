@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {applyMiddleware, createStore, compose} from 'redux';
 import {Provider} from 'react-redux';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {Router, Route} from "react-router-dom";
 import createSagaMiddleware from 'redux-saga';
 import './index.css';
 import App from './App';
-
+import history from './history';
 import * as serviceWorker from './serviceWorker';
 
 import IndexReducer from './index-reducer';
@@ -29,7 +29,7 @@ sagaMiddleware.run(IndexSagas);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <Route path="/" component={App}/>
     </Router>
   </Provider>,

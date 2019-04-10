@@ -1,6 +1,7 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
 import {SIGNUP_ERROR, SIGNUP_REQUESTING, SIGNUP_SUCCESS} from "./constants";
 import { handleApiErrors } from '../lib/api-errors'
+import history from './../history';
 
 const signupUrl = `${process.env.REACT_APP_API_URL}/api/Clients`;
 
@@ -23,6 +24,7 @@ function* signupFlow(action) {
     const {email, password} = action;
     const response = yield call(signupApi, email, password);
     yield put({type: SIGNUP_SUCCESS, response});
+    yield call(history.push, '/login');
   } catch (error) {
     yield put({type: SIGNUP_ERROR, error});
   }
